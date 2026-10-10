@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: nns-ki-plattform
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 2 --threads 4 --timeout 150
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: MONTHLY_BUDGET_USD
+        value: "5"
+      - key: MAX_DAILY_REQUESTS
+        value: "40"
+      - key: MAX_OUTPUT_TOKENS
+        value: "2500"
+      - key: OPENAI_MODEL
+        value: gpt-4.1
+      - key: INPUT_PRICE_PER_1M
+        value: "2.00"
+      - key: OUTPUT_PRICE_PER_1M
+        value: "8.00"
+      - key: COOKIE_SECURE
+        value: "1"
